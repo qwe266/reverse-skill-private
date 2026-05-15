@@ -156,6 +156,25 @@
       "docsUrl": "https://github.com/danielmiessler/SecLists",
       "canAutoInstall": true,
       "verifyCommand": ""
+    },
+    {
+      "name": "proxycat",
+      "bootstrapKind": "pip-package",
+      "pipPackage": "proxycat",
+      "docsUrl": "https://github.com/honmashironeko/ProxyCat",
+      "canAutoInstall": true,
+      "verifyCommand": "proxycat"
+    },
+    {
+      "name": "burpsuite-mcp",
+      "bootstrapKind": "local-http-mcp",
+      "mcpNames": ["burpsuite"],
+      "mcpUrl": "http://localhost:9876/mcp",
+      "servicePort": 9876,
+      "docsUrl": "https://portswigger.net/burp",
+      "canAutoInstall": false,
+      "verificationMode": "service-or-registration",
+      "manualInstallHint": "在 BurpSuite 扩展市场搜索 MCP 插件安装，启动后监听 localhost:9876"
     }
   ]
 }
