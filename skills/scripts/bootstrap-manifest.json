@@ -40,10 +40,16 @@
     {
       "name": "idalib-mcp",
       "bootstrapKind": "pip-package",
-      "pipPackage": "ida-mcp",
+      "pipPackage": "ida-pro-mcp",
+      "pipSource": "git+https://github.com/mrexodia/ida-pro-mcp.git",
       "docsUrl": "https://github.com/mrexodia/ida-pro-mcp",
       "canAutoInstall": true,
-      "verifyCommand": "ida-pro-mcp"
+      "verifyCommand": "ida-pro-mcp",
+      "postInstallSteps": [
+        "ida-pro-mcp --install (选择 Streamable HTTP + Global)",
+        "重启 IDA Pro 使插件生效",
+        "IDA 打开文件后 MCP 自动监听 127.0.0.1:13337"
+      ]
     },
     {
       "name": "jshookmcp",

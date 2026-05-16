@@ -207,9 +207,15 @@ function Ensure-PipPackageInstall {
 
     Ensure-PythonRuntime
     $python = Get-FirstCommandPath -Names @('python', 'python3')
-    & $python -m pip install --upgrade $Definition.pipPackage
+    # Use pipSource (git URL) if available, otherwise use pipPackage name
+    $installTarget = if ($Definition.PSObject.Properties['pipSource'] -and -not [string]::IsNullOrWhiteSpace($Definition.pipSource)) {
+        $Definition.pipSource
+    } else {
+        $Definition.pipPackage
+    }
+    & $python -m pip install --upgrade $installTarget
     if ($LASTEXITCODE -ne 0) {
-        throw "pip install failed for $($Definition.pipPackage)"
+        throw "pip install failed for $installTarget"
     }
 }
 

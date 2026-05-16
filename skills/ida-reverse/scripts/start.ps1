@@ -97,7 +97,7 @@ if ([string]::IsNullOrWhiteSpace($ServerPath)) {
 }
 
 if ([string]::IsNullOrWhiteSpace($ServerPath)) {
-    throw 'Missing required CLI tool: ida-pro-mcp — auto-bootstrap failed. Install manually: pip install ida-mcp'
+    throw 'Missing required CLI tool: ida-pro-mcp — auto-bootstrap failed. Install manually: pip install git+https://github.com/mrexodia/ida-pro-mcp.git && ida-pro-mcp --install'
 }
 
 # 清理旧进程（杀进程树，包括 worker 子进程）

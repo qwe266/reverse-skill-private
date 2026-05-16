@@ -180,7 +180,7 @@ C:\Tools\radare2\                      # 可选
 | 组件 | 是否必需 | 项目地址 | 作用 | 推荐安装位置 | 安装方式 |
 |---|---|---|---|---|---|
 | IDA Pro | 二进制深度逆向常用 | https://hex-rays.com/ida-pro/ | 反编译、xref、数据流、重命名、类型恢复 | 例如 `D:\APP\IDA\` | 安装 IDA 本体后，把 `IDADIR` 指向其根目录 |
-| idalib-mcp | 使用 ida-reverse 必需 | https://github.com/mrexodia/ida-pro-mcp | 暴露 `idapro_*` MCP 工具或本地 HTTP 服务 | 常见落点为 Python Scripts 目录 | `pip install ida-mcp`，安装后确认 `ida-pro-mcp --help` 可用 |
+| idalib-mcp | 使用 ida-reverse 必需 | https://github.com/mrexodia/ida-pro-mcp | 暴露 `idapro_*` MCP 工具或本地 HTTP 服务 | 常见落点为 Python Scripts 目录 | `pip install git+https://github.com/mrexodia/ida-pro-mcp.git`，然后 `ida-pro-mcp --install` 安装 IDA 插件 |
 | radare2 | 可选 | https://github.com/radareorg/radare2 | CLI 侦察、反汇编、差分、patch | `C:\Tools\radare2\` | 安装后确认 `r2`、`rabin2`、`rasm2`、`radiff2` 等可用 |
 
 ### 4.5 配套资料库
@@ -1031,27 +1031,18 @@ AI 在开始新任务时，必须先检查 `field-journal/_index.md`：
    [Environment]::SetEnvironmentVariable('IDADIR', 'D:\APP\IDA', 'User')
    ```
 
-3. 安装 idalib-mcp：
+3. 安装 ida-pro-mcp（必须从 GitHub，不是 PyPI）：
    ```powershell
-   pip install ida-mcp
+   pip install git+https://github.com/mrexodia/ida-pro-mcp.git
    ```
 
-4. 启动服务：
+4. 安装 IDA 插件：
    ```powershell
-   powershell -File "<skill-root>\ida-reverse\scripts\start.ps1"
+   ida-pro-mcp --install
    ```
-   应输出 `OK:72`
+   选择：Streamable HTTP → Global → 全选客户端
 
-5. 在 MCP 配置中注册：
-   ```json
-   {
-     "mcpServers": {
-       "idapro": {
-         "url": "http://127.0.0.1:13337/mcp"
-       }
-     }
-   }
-   ```
+5. 重启 IDA Pro，打开目标文件，插件自动监听 13337
 
 **启动成功后告诉我，我继续当前任务。**
 ```
